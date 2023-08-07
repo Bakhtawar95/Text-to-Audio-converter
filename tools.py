@@ -1,7 +1,15 @@
 from flask import Flask, render_template, request, session
 from transformers import BarkModel, AutoProcessor
 from IPython.display import Audio
+import torch
 
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+model = BarkModel.from_pretrained("suno/bark")
+sampling_rate = model.generation_config.sample_rate
+processor = AutoProcessor.from_pretrained("suno/bark")
+
+
+model = model.to(device)
 
 app = Flask(__name__)
 app.secret_key = "hani"
@@ -17,9 +25,7 @@ def home():
 
 @app.route("/process_text", methods=["POST"])
 def process_text():
-    model = BarkModel.from_pretrained("suno/bark")
-    sampling_rate = model.generation_config.sample_rate
-    processor = AutoProcessor.from_pretrained("suno/bark")
+ 
 
     user_lang = request.form.get("dropdown_lang")
     speaker = request.form.get("dropdown_voice")
@@ -46,7 +52,7 @@ def process_text():
         inputs = processor(text_prompt, voice_preset=voice_preset)
 
         # generate speech
-        speech_output = model.generate(**inputs)
+        speech_output = model.generate(**inputs.to(device))
 
         # let's hear it
         audio_data = Audio(speech_output[0].cpu().numpy(), rate=sampling_rate)
