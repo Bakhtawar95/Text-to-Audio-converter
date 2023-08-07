@@ -1,0 +1,10 @@
+# Ignore large data files
+data/
+
+# Ignore documentation
+docs/
+README.md
+
+# Ignore files generated during build or testing
+build/
+test_results/
