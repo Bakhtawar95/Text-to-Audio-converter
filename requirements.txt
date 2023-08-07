@@ -1,6 +1,7 @@
 Flask==2.3.2
 gunicorn==19.9.0
 ipython
+torch
 
 git+https://github.com/huggingface/transformers.git
 
