@@ -1,7 +1,9 @@
 Flask==2.3.2
 gunicorn==19.9.0
 ipython
+--find-links https://download.pytorch.org/whl/cpu/torch_stable.html
 torch==2.0.1
+--find-links https://download.pytorch.org/whl/cpu/torch_stable.html
 
 git+https://github.com/huggingface/transformers.git
 
