@@ -7,5 +7,8 @@ This app works in following manner:
   The model used here is Bark which is transformer based text to audio model.  All the information about bark can be found [here](https://huggingface.co/suno/bark)
 
 The application interface looks like this:
+![this](static/images/tts.png)
+
+
 
 
